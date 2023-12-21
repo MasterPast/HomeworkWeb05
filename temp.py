@@ -37,8 +37,9 @@ async def main():
 
 
 def data_adapter(data: dict):
-    return [{f"{el.get('ccy')}": {"buy": float(el.get('buy')), "sale": float(el.get('sale'))}} for el in data]
-
+    ret = [{f"{el.get('ccy')}": {"buy": float(el.get('buy')), "sale": float(el.get('sale'))}} for el in data]
+    print(ret)
+    return ret
 
 def pretty_view(data):
     print(f'Date : {date}')

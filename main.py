@@ -18,8 +18,22 @@ async def hello():
             await websocket.send(name)
             print(f'>>> {name}')
 
-            greeting = await websocket.recv()
-            print(f'<<< {greeting}')
+            data = await websocket.recv()
+            print(data)
+            # pretty_view(data)
+            # print(f'<<< {greeting}')
+
+
+async def pretty_view(data, date):
+    print(f'Date : {date}')
+    pattern = '|{:^10}|{:^10}|{:^10}|'
+    print(pattern.format('currency', 'sale', 'buy'))
+    for el in data:
+        currency, *_ = el.keys()
+        buy = el.get(currency).get('buy')
+        sale = el.get(currency).get('sale')
+        print(pattern.format(currency, sale, buy))
+
 
 if __name__ == '__main__':
     asyncio.run(hello())
