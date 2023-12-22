@@ -1,4 +1,5 @@
 import asyncio
+import json
 import websockets
 
 
@@ -12,17 +13,15 @@ async def hello():
             
             name = input('Send to server <<< ')
             if name == 'exit':
-                await websocket.send('ByeBye')
+                await websocket.send('exit')
                 break
 
             await websocket.send(name)
-            print(f'>>> {name}')
 
             data = await websocket.recv()
-            print(data)
-            # pretty_view(data)
-            # print(f'<<< {greeting}')
-
+            decode_data = json.loads(data)
+            for date, currency_exchange in decode_data.items():
+                await pretty_view(currency_exchange, date)
 
 async def pretty_view(data, date):
     print(f'Date : {date}')
