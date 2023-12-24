@@ -1,9 +1,7 @@
 import aiohttp
-import aiofile
 import asyncio
 import json
 import logging
-import aiopath
 import websockets
 from aioconsole import ainput
 from currencies import currencies
@@ -44,16 +42,12 @@ async def validate_command(commands):
                 if len(commands) > 2:
                     if commands[2] in currencies:
                         extra_currency = commands[2]
-        elif commands[0] == 'exit':
-            logging.info('STOP')
-            await server_down()
-
+        
     return days_ago, extra_currency
 
 async def choose_currency(response_body, extra_currency):
 
     currency_exchange = []
-
     decode_data = json.loads(response_body)
     for elems in decode_data['exchangeRate']:
         if elems['currency'] == 'USD':
@@ -86,22 +80,17 @@ async def open_websocket(websocket):
     logging.info(command)
     commands = await parse_command(command)
     days_ago, extra_currency = await validate_command(commands)
-
     async with aiohttp.ClientSession() as session:
         response_modified = await response_constructor(days_ago)
-        
         async with session.get(response_modified) as response:
-
             if 10 > days_ago > 0:
                 response.body = await response.text()
                 currency_exchange = await choose_currency(response.body, extra_currency)       
                 data = await data_adapter_date(currency_exchange, response_day(days_ago))            
-
             else:
                 currency_exchange = await response.text()
                 data_from_json = json.loads(currency_exchange)
                 data = await data_adapter_today(data_from_json)
-
     return_data = json.dumps(data)
     logging.info(return_data)
     await websocket.send(return_data)
@@ -117,10 +106,6 @@ async def server_console():
         if command == 'exit':
             await server_down()
     
-async def qqq():
-    for i in range(10000000):
-            logging.info(i)
-
 async def ws():
     async with websockets.serve(open_websocket, 'localhost', 8765):
         await asyncio.Future() 
