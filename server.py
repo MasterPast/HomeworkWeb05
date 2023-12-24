@@ -40,6 +40,7 @@ async def validate_command(commands):
                 if commands[1].isdigit():
                     days_ago = int(commands[1])
                 if len(commands) > 2:
+                    commands[2] = commands[2].upper()
                     if commands[2] in currencies:
                         extra_currency = commands[2]
         
