@@ -1,21 +1,2 @@
-2023-12-24 15:39:03,721 server listening on [::1]:8765
-2023-12-24 15:39:03,721 server listening on 127.0.0.1:8765
-2023-12-24 15:39:07,399 connection open
-2023-12-24 15:39:14,548 exchange 3 pln
-2023-12-24 15:39:14,548 ['exchange', '3', 'pln']
-2023-12-24 15:39:14,769 {"21.12.2023": [{"EUR": {"buy": 40.9, "sale": 41.9}}, {"PLN": {"buy": 9.4546, "sale": 9.4546}}, {"USD": {"buy": 37.4, "sale": 37.9}}]}
-2023-12-24 15:39:14,769 connection closed
-2023-12-24 15:39:14,785 connection open
-2023-12-24 15:39:18,491 connection handler failed
-Traceback (most recent call last):
-  File "C:\Users\Ìaster\AppData\Local\Programs\Python\Python311\Lib\site-packages\websockets\legacy\server.py", line 236, in handler
-    await self.ws_handler(self)
-  File "d:\Projects\Repositories\HomeworkWeb05\server.py", line 80, in open_websocket
-    command = await websocket.recv()
-              ^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\Ìaster\AppData\Local\Programs\Python\Python311\Lib\site-packages\websockets\legacy\protocol.py", line 568, in recv
-    await self.ensure_open()
-  File "C:\Users\Ìaster\AppData\Local\Programs\Python\Python311\Lib\site-packages\websockets\legacy\protocol.py", line 948, in ensure_open
-    raise self.connection_closed_exc()
-websockets.exceptions.ConnectionClosedOK: received 1000 (OK); then sent 1000 (OK)
-2023-12-24 15:39:18,491 connection closed
+2023-12-24 15:41:34,461 server listening on [::1]:8765
+2023-12-24 15:41:34,461 server listening on 127.0.0.1:8765
